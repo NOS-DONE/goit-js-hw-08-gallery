@@ -1,4 +1,4 @@
-import imagesList from "./gallery-items.js";
+import imagesList from "./src/gallery-items.js";
 
 // console.table(images);
 

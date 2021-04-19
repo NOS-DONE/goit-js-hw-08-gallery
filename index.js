@@ -1,6 +1,4 @@
-import imagesList from "./src/gallery-items.js";
-
-// console.table(images);
+import imagesList from "./gallery-items.js";
 
 const refs = {
     gallery: document.querySelector('.js-gallery'),
@@ -48,8 +46,6 @@ function handleGalleryElementClick(e) {
 
 function handleCloseModalButton() {
     closeModal()
-    refs.fullSizeImage.src = '';
-
 }
 
 function handleModalOverlayClick(e) {
@@ -60,35 +56,29 @@ function handleModalOverlayClick(e) {
 }
 
 function handleKeys(e) {
-    console.log(e);
     if(e.code === 'Escape') {
         closeModal()
     }
     
     if(e.code === 'ArrowLeft' &&  activeIndex > 0) {
-        console.log(activeIndex);
         refs.fullSizeImage.src = imagesList[activeIndex - 1].original;
+        refs.fullSizeImage.alt = imagesList[activeIndex - 1].description;
         activeIndex -= 1;
-        console.log(activeIndex);
 
     }
 
     if(e.code === 'ArrowRight' &&  activeIndex < imagesList.length - 1) {
-        console.log(activeIndex);
         refs.fullSizeImage.src = imagesList[activeIndex + 1].original;
+        refs.fullSizeImage.alt = imagesList[activeIndex + 1].description;
         activeIndex += 1;
-        console.log(activeIndex);
-
     }
-
 }
-
-
-
 
 function closeModal() {
     refs.lightbox.classList.remove('is-open');
     window.removeEventListener('keydown', handleKeys);
+    refs.fullSizeImage.src = '';
+    refs.fullSizeImage.alt = '';
 }
 
 

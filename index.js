@@ -39,8 +39,7 @@ function handleGalleryElementClick(e) {
     window.addEventListener('keydown', handleKeys);
 
     refs.lightbox.classList.add('is-open');
-    refs.fullSizeImage.src = e.target.dataset.source;
-    refs.fullSizeImage.alt = e.target.alt;
+    updateAttributes(e.target.dataset.source, e.target.alt);
     activeIndex = Number(e.target.dataset.index);
 }
 
@@ -61,15 +60,12 @@ function handleKeys(e) {
     }
     
     if(e.code === 'ArrowLeft' &&  activeIndex > 0) {
-        refs.fullSizeImage.src = imagesList[activeIndex - 1].original;
-        refs.fullSizeImage.alt = imagesList[activeIndex - 1].description;
+        updateAttributes(imagesList[activeIndex - 1].original, imagesList[activeIndex - 1].description)
         activeIndex -= 1;
-
     }
 
     if(e.code === 'ArrowRight' &&  activeIndex < imagesList.length - 1) {
-        refs.fullSizeImage.src = imagesList[activeIndex + 1].original;
-        refs.fullSizeImage.alt = imagesList[activeIndex + 1].description;
+        updateAttributes(imagesList[activeIndex + 1].original, imagesList[activeIndex + 1].description);
         activeIndex += 1;
     }
 }
@@ -77,8 +73,12 @@ function handleKeys(e) {
 function closeModal() {
     refs.lightbox.classList.remove('is-open');
     window.removeEventListener('keydown', handleKeys);
-    refs.fullSizeImage.src = '';
-    refs.fullSizeImage.alt = '';
+    updateAttributes('', '')
+}
+
+function updateAttributes(src, alt) {
+    refs.fullSizeImage.src = src;
+    refs.fullSizeImage.alt = alt;
 }
 
 
